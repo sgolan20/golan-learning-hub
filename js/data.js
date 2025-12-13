@@ -11,31 +11,13 @@ const siteData = {
     // רשימת נושאים
     topics: [
         {
-            id: "javascript",
-            name: "JavaScript",
-            icon: "📜",
+            id: "lovable-course",
+            name: "קורס בניית אתר עם Lovable",
+            icon: "💜",
             pages: [
-                { id: "js-basics", title: "יסודות JavaScript", file: "pages/js-basics.html" },
-                { id: "js-functions", title: "פונקציות", file: "pages/js-functions.html" },
-                { id: "js-arrays", title: "מערכים", file: "pages/js-arrays.html" }
-            ]
-        },
-        {
-            id: "html",
-            name: "HTML",
-            icon: "🌐",
-            pages: [
-                { id: "html-basics", title: "יסודות HTML", file: "pages/html-basics.html" },
-                { id: "html-forms", title: "טפסים", file: "pages/html-forms.html" }
-            ]
-        },
-        {
-            id: "css",
-            name: "CSS",
-            icon: "🎨",
-            pages: [
-                { id: "css-basics", title: "יסודות CSS", file: "pages/css-basics.html" },
-                { id: "css-flexbox", title: "Flexbox", file: "pages/css-flexbox.html" }
+                { id: "lovable-prompts", title: "כתיבת פרומפט בצורה נכונה", file: "pages/lovable-prompts.html" },
+                { id: "lovable-visual-edits", title: "Visual Edits - עריכה ויזואלית", file: "pages/lovable-visual-edits.html" },
+                { id: "lovable-themes", title: "Themes - עיצוב ומותג", file: "pages/lovable-themes.html" }
             ]
         }
     ]

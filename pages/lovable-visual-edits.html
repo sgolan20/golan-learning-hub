@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Edits - עריכה ויזואלית</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background-color: #f8fafc;
+            padding: 20px;
+        }
+        .feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .feature-card h3 {
+            color: #7c3aed;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        .keyboard-shortcut {
+            display: inline-block;
+            background-color: #1e293b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 0 4px;
+        }
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        .steps-list li {
+            counter-increment: step-counter;
+            padding: 12px 12px 12px 50px;
+            position: relative;
+            background-color: #f8fafc;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-right: 3px solid #7c3aed;
+        }
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #7c3aed;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .tool-item {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        .tool-item h4 {
+            color: #0369a1;
+            margin-bottom: 8px;
+        }
+        .credits-note {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 24px 0;
+        }
+        .credits-note h3 {
+            color: #166534;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <h1>Visual Edits - עריכה ויזואלית</h1>
+
+        <div class="info-box">
+            <strong>מה זה Visual Edits?</strong> ממשק דמוי Figma שמאפשר לבצע שינויים ויזואליים מדויקים בלי לכתוב פרומפטים - מושלם לעידון עיצוב!
+        </div>
+
+        <div class="credits-note">
+            <h3>💰 חוסכים קרדיטים!</h3>
+            <p>עריכה ויזואלית <strong>לא צורכת קרדיטים</strong> - חוץ מעריכת אלמנטים דינמיים או שימוש ב-Agent</p>
+        </div>
+
+        <h2>איך מפעילים Visual Edits</h2>
+
+        <ol class="steps-list">
+            <li>לחצו על כפתור <strong>"Visual Edits"</strong> בסרגל הכלים העליון</li>
+            <li>העמוד יעבור למצב עריכה - תראו מסגרות מסביב לאלמנטים</li>
+            <li>לחצו על האלמנט שרוצים לערוך</li>
+            <li>יופיע פאנל עריכה עם כל האפשרויות</li>
+            <li>בצעו את השינויים - הם מופיעים בזמן אמת!</li>
+        </ol>
+
+        <h2>קיצורי מקלדת שימושיים</h2>
+
+        <div class="feature-card">
+            <h3><span class="feature-icon">🎯</span> בחירה מרובה</h3>
+            <p>
+                החזיקו <span class="keyboard-shortcut">⌘ Command</span> (Mac) או
+                <span class="keyboard-shortcut">⊞ Win</span> (Windows) ולחצו על מספר אלמנטים לעריכה מרובה בבת אחת.
+            </p>
+        </div>
+
+        <h2>מה אפשר לערוך</h2>
+
+        <div class="tool-grid">
+            <div class="tool-item">
+                <h4>🎨 צבעים</h4>
+                <p>רקע, טקסט, גבולות</p>
+            </div>
+            <div class="tool-item">
+                <h4>📝 טקסט</h4>
+                <p>תוכן, גופן, גודל</p>
+            </div>
+            <div class="tool-item">
+                <h4>📐 מידות</h4>
+                <p>רוחב, גובה, margin, padding</p>
+            </div>
+            <div class="tool-item">
+                <h4>🖼️ תמונות</h4>
+                <p>החלפה, גודל, יישור</p>
+            </div>
+            <div class="tool-item">
+                <h4>📍 פריסה</h4>
+                <p>יישור, מרווחים, סידור</p>
+            </div>
+            <div class="tool-item">
+                <h4>🔲 גבולות</h4>
+                <p>עובי, צבע, רדיוס</p>
+            </div>
+        </div>
+
+        <h2>תכונות מתקדמות</h2>
+
+        <div class="feature-card">
+            <h3><span class="feature-icon">⚡</span> Hot Module Reloading</h3>
+            <p>כל שינוי מופיע מיד על המסך בזמן אמת - מופעל על ידי Vite. לא צריך לרענן!</p>
+        </div>
+
+        <div class="feature-card">
+            <h3><span class="feature-icon">🎛️</span> Floating Combo-box</h3>
+            <p>בקרים צפים מופיעים ליד האלמנט שאתם עורכים - מאפשרים עריכה pixel-perfect.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3><span class="feature-icon">🤖</span> יצירת תמונות AI</h3>
+            <p>אפשר ליצור תמונות חדשות עם בינה מלאכותית ישירות מתוך Visual Edits!</p>
+        </div>
+
+        <h2>מתי להשתמש ב-Visual Edits</h2>
+
+        <div class="question">
+            <span class="question-number">✅ מתאים ל:</span>
+            <ul>
+                <li>התאמת צבעים ועיצוב</li>
+                <li>שינוי טקסטים וכותרות</li>
+                <li>התאמת מרווחים ופריסה</li>
+                <li>החלפת תמונות</li>
+                <li>עידון UI לאחר יצירה ראשונית</li>
+            </ul>
+        </div>
+
+        <div class="question">
+            <span class="question-number">❌ פחות מתאים ל:</span>
+            <ul>
+                <li>הוספת פונקציונליות חדשה</li>
+                <li>שינויים בלוגיקה</li>
+                <li>חיבור למסד נתונים</li>
+                <li>אלמנטים דינמיים (צורך קרדיטים)</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <strong>טיפ מקצועי:</strong> השתמשו ב-Visual Edits לעידון עיצוב אחרי שבניתם את המבנה הבסיסי עם פרומפטים. זה חוסך קרדיטים ונותן שליטה מדויקת יותר!
+        </div>
+
+        <h2>תרגול מעשי</h2>
+
+        <div class="question">
+            <span class="question-number">משימה 1:</span>
+            <p>היכנסו ל-Visual Edits ושנו את צבע הרקע של כפתור כלשהו.</p>
+            <div class="answer-space"></div>
+        </div>
+
+        <div class="question">
+            <span class="question-number">משימה 2:</span>
+            <p>בחרו 3 אלמנטים בו-זמנית (עם Ctrl/Cmd) ושנו להם את ה-padding.</p>
+            <div class="answer-space"></div>
+        </div>
+
+        <div class="question">
+            <span class="question-number">משימה 3:</span>
+            <p>החליפו תמונה קיימת בתמונה חדשה דרך Visual Edits.</p>
+            <div class="answer-space"></div>
+        </div>
+    </div>
+</body>
+</html>
