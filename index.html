@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מרכז הלמידה</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <!-- סרגל צד קומפקטי -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>מרכז הלמידה</h1>
+            <button class="toggle-sidebar" id="toggleSidebar">◀</button>
+        </div>
+
+        <div class="sidebar-content">
+            <!-- חיפוש -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="חיפוש...">
+            </div>
+
+            <!-- רשימת נושאים -->
+            <nav class="topics-nav" id="topicsNav">
+                <!-- הנושאים יטענו דינמית -->
+            </nav>
+        </div>
+    </aside>
+
+    <!-- אזור תוכן ראשי -->
+    <main class="main-content" id="mainContent">
+        <div class="content-header">
+            <div class="breadcrumb" id="breadcrumb">
+                <span>בית</span>
+            </div>
+            <div class="actions">
+                <button class="btn btn-qr" id="showQrBtn" title="הצג QR Code">
+                    <span class="icon">◫</span>
+                    <span class="text">QR</span>
+                </button>
+                <button class="btn btn-copy" id="copyLinkBtn" title="העתק קישור">
+                    <span class="icon">🔗</span>
+                    <span class="text">העתק</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-area" id="contentArea">
+            <!-- תוכן ברירת מחדל -->
+            <div class="welcome-screen">
+                <h2>ברוכים הבאים למרכז הלמידה</h2>
+                <p>בחר נושא מהתפריט כדי להתחיל</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number" id="totalTopics">0</span>
+                        <span class="stat-label">נושאים</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalPages">0</span>
+                        <span class="stat-label">דפים</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- מודל QR Code -->
+    <div class="modal" id="qrModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>QR Code לדף הנוכחי</h3>
+                <button class="close-modal" id="closeQrModal">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="qrCode"></div>
+                <p class="qr-url" id="qrUrl"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- הודעה קופצת -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

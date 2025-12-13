@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n[Learning] הוספת SKILL ללמידה והגדרות פרויקט\n\n- יצירת SKILL בתיקיית .claude/commands/learn.md\n- הוספת CLAUDE.md עם הוראות לפרויקט\n- הגדרת כללים ל-commit אוטומטי ללא push\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
     ]
   }
 }

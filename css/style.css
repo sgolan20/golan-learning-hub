@@ -1,0 +1,540 @@
+/* משתנים גלובליים */
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --secondary-color: #64748b;
+    --success-color: #22c55e;
+    --bg-color: #f8fafc;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #e2e8f0;
+    --sidebar-hover: #334155;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --sidebar-width: 280px;
+    --sidebar-collapsed: 60px;
+    --header-height: 50px;
+    --transition: 0.3s ease;
+}
+
+/* איפוס בסיסי */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    direction: rtl;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* סרגל צד */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    transition: width var(--transition);
+    z-index: 100;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed);
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    min-height: var(--header-height);
+}
+
+.sidebar-header h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-header h1 {
+    display: none;
+}
+
+.toggle-sidebar {
+    background: none;
+    border: none;
+    color: var(--sidebar-text);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    transition: transform var(--transition);
+}
+
+.sidebar.collapsed .toggle-sidebar {
+    transform: rotate(180deg);
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 8px;
+}
+
+.sidebar.collapsed .sidebar-content {
+    padding: 8px 4px;
+}
+
+/* חיפוש */
+.search-box {
+    margin-bottom: 12px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(255,255,255,0.1);
+    color: var(--sidebar-text);
+    font-size: 0.9rem;
+}
+
+.search-box input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+.sidebar.collapsed .search-box {
+    display: none;
+}
+
+/* ניווט נושאים */
+.topics-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.topic-item {
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.topic-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color var(--transition);
+    gap: 8px;
+}
+
+.topic-header:hover {
+    background-color: var(--sidebar-hover);
+}
+
+.topic-icon {
+    font-size: 1.1rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+.topic-name {
+    flex: 1;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .topic-name {
+    display: none;
+}
+
+.topic-toggle {
+    font-size: 0.7rem;
+    transition: transform var(--transition);
+}
+
+.topic-item.expanded .topic-toggle {
+    transform: rotate(90deg);
+}
+
+.sidebar.collapsed .topic-toggle {
+    display: none;
+}
+
+/* רשימת דפים */
+.pages-list {
+    display: none;
+    padding: 4px 0 4px 24px;
+}
+
+.topic-item.expanded .pages-list {
+    display: block;
+}
+
+.sidebar.collapsed .pages-list {
+    display: none;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all var(--transition);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-link:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--sidebar-text);
+}
+
+.page-link.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* תוכן ראשי */
+.main-content {
+    flex: 1;
+    margin-right: var(--sidebar-width);
+    transition: margin-right var(--transition);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar.collapsed ~ .main-content {
+    margin-right: var(--sidebar-collapsed);
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    min-height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.breadcrumb span:not(:last-child)::after {
+    content: ' / ';
+    margin: 0 6px;
+}
+
+.breadcrumb-link {
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: color var(--transition);
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all var(--transition);
+}
+
+.btn:hover {
+    background-color: var(--bg-color);
+    border-color: var(--primary-color);
+}
+
+.btn .icon {
+    font-size: 1rem;
+}
+
+/* אזור תוכן */
+.content-area {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* מסך פתיחה */
+.welcome-screen {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.welcome-screen h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+}
+
+/* iframe לתצוגת דפים */
+.page-iframe {
+    width: 100%;
+    height: calc(100vh - var(--header-height) - 40px);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* מודל */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+.modal-body {
+    padding: 24px;
+    text-align: center;
+}
+
+#qrCode {
+    display: inline-block;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.qr-url {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    word-break: break-all;
+}
+
+/* הודעה קופצת */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--text-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 300;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-collapsed);
+    }
+
+    .sidebar.expanded {
+        width: var(--sidebar-width);
+    }
+
+    .main-content {
+        margin-right: var(--sidebar-collapsed);
+    }
+
+    .sidebar.expanded ~ .main-content {
+        margin-right: var(--sidebar-width);
+    }
+
+    .btn .text {
+        display: none;
+    }
+}
+
+/* סגנון פנימי לדפי תרגול (יש להוסיף לדפים הפנימיים) */
+.worksheet {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    line-height: 1.8;
+    direction: rtl;
+}
+
+.worksheet h1 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+}
+
+.worksheet h2 {
+    color: var(--text-color);
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.worksheet .question {
+    background-color: #f1f5f9;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-right: 4px solid var(--primary-color);
+}
+
+.worksheet .question-number {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.worksheet .answer-space {
+    border: 2px dashed var(--border-color);
+    min-height: 60px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.worksheet .info-box {
+    background-color: #dbeafe;
+    border: 1px solid #93c5fd;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.worksheet .warning-box {
+    background-color: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.worksheet code {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.worksheet pre {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+}
