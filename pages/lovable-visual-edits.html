@@ -113,35 +113,7 @@
         }
 
         /* כפתור הדפסה */
-        .print-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #7c3aed;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        .print-btn:hover {
-            background-color: #6d28d9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
-        }
-
         @media print {
-            .print-btn {
-                display: none !important;
-            }
             body {
                 padding: 0;
                 background: white;
@@ -158,10 +130,10 @@
     </style>
 </head>
 <body>
-    <button class="print-btn" onclick="window.print()">
+    <!-- <button class="print-btn" onclick="window.print()">
         <span>🖨️</span>
         <span>הדפסה</span>
-    </button>
+    </button> -->
 
     <div class="worksheet">
         <h1>Visual Edits - עריכה ויזואלית</h1>
