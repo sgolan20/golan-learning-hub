@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const showQrBtn = document.getElementById('showQrBtn');
     const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const printPageBtn = document.getElementById('printPageBtn');
     const qrModal = document.getElementById('qrModal');
     const closeQrModal = document.getElementById('closeQrModal');
     const qrCodeEl = document.getElementById('qrCode');
@@ -125,6 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // העתקת קישור
         copyLinkBtn.addEventListener('click', copyCurrentLink);
+
+        // הדפסת דף
+        printPageBtn.addEventListener('click', printCurrentPageSafe);
 
         // שינוי ב-hash
         window.addEventListener('hashchange', handleUrlHash);
@@ -259,7 +263,60 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // הדפסת דף נוכחי
+    function printCurrentPage() {
+        if (!currentPageId) {
+            showToast('בחר דף קודם');
+            return;
+        }
+
+        const iframe = contentArea.querySelector('iframe');
+        if (iframe) {
+            iframe.contentWindow.print();
+        }
+    }
+
     // הודעה קופצת
+    function printCurrentPageSafe() {
+        const iframe = contentArea.querySelector('iframe');
+        if (!iframe) {
+            window.print();
+            return;
+        }
+
+        try {
+            printCurrentPage();
+            return;
+        } catch (e) {
+            // ignore and fallback below (e.g. file:// SecurityError)
+        }
+
+        const src = iframe.getAttribute('src');
+        if (!src) return;
+
+        const printWin = window.open(src, '_blank');
+        if (!printWin) {
+            showToast('Please allow popups to print');
+            return;
+        }
+
+        const tryPrint = () => {
+            try {
+                printWin.focus();
+                printWin.print();
+            } catch (err) {
+                // user can still print manually
+            }
+        };
+
+        try {
+            printWin.addEventListener('load', tryPrint, { once: true });
+        } catch (err) {
+            // ignore
+        }
+        setTimeout(tryPrint, 600);
+    }
+
     function showToast(message) {
         toast.textContent = message;
         toast.classList.add('show');
