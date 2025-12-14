@@ -12,14 +12,6 @@ const defaultData = {
             color: "#8b5cf6",
             topics: [
                 {
-                    id: "getting-started",
-                    name: "איך מתחילים",
-                    icon: "🚀",
-                    pages: [
-                        { id: "what-is-vibe-coding", title: "מה זה vibe coding?", file: "pages/what-is-vibe-coding.html" }
-                    ]
-                },
-                {
                     id: "lovable-exercises",
                     name: "תרגולים ב-Lovable",
                     icon: "💪",
