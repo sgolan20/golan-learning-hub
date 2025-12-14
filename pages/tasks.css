@@ -377,53 +377,59 @@ strong {
 /* Responsive */
 @media (max-width: 768px) {
     body {
-        font-size: 18px;
-        line-height: 1.8;
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 20px 10px;
     }
 
     .container {
-        margin: 20px 10px;
-        border-radius: 15px;
+        margin: 0;
+        border-radius: 12px;
     }
 
     .header {
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 
     .header h1 {
-        font-size: 2.2em;
-        margin-bottom: 12px;
+        font-size: 1.5em;
+        margin-bottom: 8px;
+        flex-direction: column;
+        gap: 10px;
     }
 
     .header-number {
-        font-size: 3em;
+        font-size: 2.5em;
     }
 
     .header p {
-        font-size: 1.15em;
+        font-size: 0.95em;
+        line-height: 1.5;
     }
 
     .content {
-        padding: 25px 20px;
+        padding: 20px 15px;
     }
 
     h2 {
-        font-size: 1.6em;
-        margin: 30px 0 15px 0;
+        font-size: 1.3em;
+        margin: 25px 0 12px 0;
+        gap: 8px;
     }
 
     h3 {
-        font-size: 1.3em;
-        margin: 25px 0 12px 0;
+        font-size: 1.1em;
+        margin: 20px 0 10px 0;
     }
 
     p {
-        font-size: 1.15em;
-        margin: 10px 0;
+        font-size: 1em;
+        margin: 8px 0;
+        line-height: 1.6;
     }
 
     strong {
-        font-size: 1.05em;
+        font-size: 1em;
     }
 
     .section,
@@ -432,76 +438,99 @@ strong {
     .error-box,
     .success-box,
     .warning-box {
-        padding: 20px;
-        margin: 15px 0;
+        padding: 15px;
+        margin: 12px 0;
     }
 
     .checklist {
-        padding: 20px;
+        padding: 15px;
     }
 
     .checklist li {
-        font-size: 1.1em;
+        font-size: 0.95em;
+        padding: 8px;
+        margin: 8px 0;
     }
 
     .tip-box strong,
     .error-box strong,
     .success-box strong,
     .warning-box strong {
-        font-size: 1.15em;
+        font-size: 1em;
     }
 
     .tip-box,
     .error-box,
     .success-box,
     .warning-box {
-        font-size: 1.1em;
+        font-size: 0.95em;
     }
 
     ul, ol {
-        font-size: 1.1em;
-        padding-right: 30px;
+        font-size: 0.95em;
+        padding-right: 20px;
+        margin: 10px 0;
     }
 
     li {
-        margin: 10px 0;
-        font-size: 1.1em;
+        margin: 8px 0;
+        font-size: 1em;
+        line-height: 1.5;
     }
 
     code {
-        font-size: 0.95em;
-        padding: 15px;
-        line-height: 1.6;
+        font-size: 0.85em;
+        padding: 12px;
+        line-height: 1.5;
     }
 
     .task-number {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2em;
-        line-height: 40px;
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+        line-height: 35px;
+        margin-left: 10px;
+    }
+
+    .divider {
+        margin: 25px 0;
     }
 
     .back-button {
         width: 50px;
         height: 50px;
-        bottom: 20px;
-        left: 20px;
+        bottom: 15px;
+        left: 15px;
         font-size: 1.5em;
     }
 
     .print-button {
         width: 50px;
         height: 50px;
-        bottom: 20px;
-        right: 20px;
+        bottom: 15px;
+        right: 15px;
         font-size: 1.5em;
     }
 
+    .back-button-tooltip,
+    .print-button-tooltip {
+        display: none;
+    }
+
     .brand-logo {
-        width: 70px;
-        top: 15px;
-        left: 15px;
-        padding: 6px;
+        width: 60px;
+        top: 12px;
+        left: 12px;
+        padding: 5px;
+    }
+
+    .font-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .font-item {
+        padding: 12px;
     }
 }
 
