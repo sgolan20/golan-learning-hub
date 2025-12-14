@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalTopicsEl = document.getElementById('totalTopics');
     const totalPagesEl = document.getElementById('totalPages');
     const sidebarTitle = document.querySelector('.sidebar-header h1');
-    const editModeBtn = document.getElementById('editModeBtn');
 
     // מודלים לעריכה
     const editCourseModal = document.getElementById('editCourseModal');
@@ -46,15 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function init() {
         updateStats();
         setupEventListeners();
-        setupEditModeListeners();
         handleUrlHash();
-        
-        // בדיקה שהכפתור נמצא
-        if (!editModeBtn) {
-            console.error('❌ editModeBtn לא נמצא! בדוק את ה-HTML');
-        } else {
-            console.log('✅ editModeBtn נמצא:', editModeBtn);
-        }
     }
 
     // === מצב עריכה ===
