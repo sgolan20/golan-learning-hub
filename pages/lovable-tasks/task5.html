@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>אבטחת דף הנחיתה - Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="../tasks.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <img src="../logo-shahar.png" alt="שחר גולן - קורסים, הדרכות, סדנאות AI" class="brand-logo">
+    
+    <div class="header">
+        <h1><span class="header-number">5</span>🔒 אבטחת דף הנחיתה</h1>
+        <p>לפני שמפרסמים את דף הנחיתה, חשוב לוודא שהוא מאובטח ושאין דליפה של מידע רגיש. Lovable מציע כלי אבטחה מתקדם שסורק את האתר שלכם ומזהה בעיות פוטנציאליות.</p>
+    </div>
+
+    <div class="content">
+
+<div class="section">
+    <h2>🛡️ למה אבטחה חשובה?</h2>
+    <p>גם דף נחיתה פשוט עם טופס לידים יכול להיות פגיע:</p>
+    <ul>
+        <li><strong>דליפת נתונים</strong> - מידע של לקוחות עלול להגיע לעיניים לא רצויות</li>
+        <li><strong>מחיקת מידע</strong> - האקרים יכולים למחוק את כל הלידים שלכם</li>
+        <li><strong>גישה לא מורשית</strong> - אנשים לא מורשים יכולים לצפות במידע פרטי</li>
+        <li><strong>מפתחות API חשופים</strong> - מפתחות סודיים שנמצאים בקוד הגלוי</li>
+    </ul>
+    <p>Lovable מזהה את הבעיות האלה אוטומטית ועוזר לכם לתקן אותן!</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">1</span>
+    <h2>משימה 1: גישה ל-Security View 🔍</h2>
+    <p>פתחו את תצוגת האבטחה כדי לראות את מצב האבטחה של הפרויקט.</p>
+
+    <h3>איך עושים את זה:</h3>
+    <ol>
+        <li>לחצו על כפתור ה-<strong>+</strong> שליד Preview</li>
+        <li>בחרו <strong>Security</strong></li>
+        <li>המתינו שהסריקה תסתיים</li>
+    </ol>
+
+    <div class="tip-box">
+        <strong>💡 טיפ:</strong> תצוגת האבטחה מציגה ממצאים ממספר מקורות: יועץ אבטחת מסד הנתונים, סקירת AI של הסכמה ומדיניות RLS, וכן סקירת AI של הקוד עצמו.
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">2</span>
+    <h2>שלב 2: היכרות עם רמות החומרה 🚦</h2>
+    <p>למדו להבין את סוגי ההתראות שמופיעות:</p>
+
+    <h3>🔴 Error - שגיאה קריטית</h3>
+    <p>בעיות אבטחה חמורות שחייבים לטפל בהן מיד לפני הפרסום. למשל:</p>
+    <ul>
+        <li>טבלאות ללא הגנת RLS</li>
+        <li>מפתחות API חשופים בקוד</li>
+        <li>גישה פתוחה למידע רגיש</li>
+    </ul>
+
+    <h3>🟡 Warning - אזהרה</h3>
+    <p>בעיות אבטחה חשובות שכדאי לטפל בהן. למשל:</p>
+    <ul>
+        <li>הרשאות רחבות מדי</li>
+        <li>חוסר בבדיקת סיסמאות שדלפו</li>
+        <li>מדיניות RLS לא מספקת</li>
+    </ul>
+
+    <h3>🔵 Info - מידע</h3>
+    <p>המלצות כלליות ושיטות עבודה מומלצות לשיפור האבטחה.</p>
+
+    <div class="section" style="margin-top: 25px;">
+        <h3 style="margin-top: 0; color: #667eea;">💡 איך זה נראה:</h3>
+        <p style="font-size: 1em; margin-bottom: 15px;">
+            דוגמה למסך ה-Security View עם ממצאים - שגיאות ואזהרות שזוהו באפליקציה
+        </p>
+        <img src="security-scan-example.png" alt="דוגמה לממצאי סריקת אבטחה ב-Lovable" style="width: 100%; max-width: 700px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 15px 0;">
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">3</span>
+    <h2>משימה 3: תיקון בעיות עם "Try to Fix" 🔧</h2>
+    <p>רוב הבעיות ניתנות לתיקון אוטומטי בלחיצה אחת!</p>
+
+    <h3>איך עושים את זה:</h3>
+    <ol>
+        <li>עברו על רשימת הממצאים ב-Security View</li>
+        <li>לכל ממצא עם כפתור <strong>Try to fix</strong> - לחצו עליו</li>
+        <li>Lovable ינסה לתקן את הבעיה אוטומטית</li>
+        <li>בדקו שהתיקון הצליח (הממצא אמור להיעלם)</li>
+    </ol>
+
+    <div class="warning-box">
+        <strong>⚠️ שימו לב:</strong> לא כל התיקונים מובטחים לפתור את הבעיה ב-100%. לפעמים נדרשת התערבות ידנית או פרומפט נוסף.
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">4</span>
+    <h2>משימה 4: סריקת אבטחה מעמיקה 🔬</h2>
+    <p>בקשו סקירת אבטחה מקיפה של כל הקוד באמצעות AI.</p>
+
+    <h3>איך עושים את זה:</h3>
+
+    <h3>אפשרות א' - דרך ה-Security View:</h3>
+    <ul>
+        <li>לחצו על כפתור <strong>Security Review</strong></li>
+        <li>המתינו לסיום הסריקה המעמיקה</li>
+    </ul>
+
+    <h3>אפשרות ב' - דרך הצ'אט:</h3>
+    <p><strong>פרומפט לדוגמא:</strong></p>
+    <code>בדוק את אבטחת דף הנחיתה שלי ותן לי דוח מפורט על בעיות אבטחה אפשריות</code>
+
+    <p>הסריקה המעמיקה בודקת:</p>
+    <ul>
+        <li>כל הקוד באפליקציה</li>
+        <li>מניעת XSS (הזרקת סקריפטים)</li>
+        <li>סניטציה של קלט משתמש</li>
+        <li>פגיעויות באימות</li>
+        <li>מדיניות RLS ואבטחת מסד הנתונים</li>
+    </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">5</span>
+    <h2>שלב 5: היכרות עם RLS (Row Level Security) 🗃️</h2>
+    <p>RLS קובע מי יכול לגשת לאיזה מידע במסד הנתונים.</p>
+
+    <h3>מה זה RLS?</h3>
+    <p>Row Level Security (אבטחה ברמת השורה) הוא מנגנון שמגדיר כללים - מי יכול לקרוא, לכתוב, לעדכן או למחוק מידע בטבלאות שלכם.</p>
+
+    <h3>דוגמאות למדיניות RLS:</h3>
+    <ul>
+        <li><strong>מידע אישי</strong> - משתמש רואה רק את המידע שלו עצמו</li>
+        <li><strong>תוכן ציבורי</strong> - כולם יכולים לקרוא, רק הבעלים יכול לערוך</li>
+        <li><strong>גישה לצוות</strong> - חברי צוות רואים מידע משותף</li>
+    </ul>
+
+    <p><strong>פרומפט לבדיקת RLS:</strong></p>
+    <code>בדוק את מדיניות ה-RLS בטבלת הלידים שלי וודא שרק המשתמש המחובר יכול לראות את הלידים שלו</code>
+
+    <div class="tip-box">
+        <strong>💡 טיפ:</strong> לדף נחיתה עם טופס לידים - בדרך כלל רוצים שכל אחד יוכל לשלוח ליד (INSERT), אבל רק בעל האתר יוכל לקרוא את הלידים (SELECT).
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="task-card">
+    <span class="task-number">6</span>
+    <h2>משימה 6: אבטחת מפתחות API 🔑</h2>
+    <p>מפתחות API לעולם לא צריכים להיות בקוד הגלוי!</p>
+
+    <h3>מה לא לעשות:</h3>
+    <p>אם תדביקו מפתח API בצ'אט, Lovable יזהה אותו ויזהיר אתכם.</p>
+
+    <h3>מה כן לעשות:</h3>
+    <p>במקום להדביק מפתחות, תארו מה אתם רוצים להשיג:</p>
+
+    <p><strong>❌ לא לעשות:</strong></p>
+    <code>הוסף את מפתח ה-API הזה: sk-1234567890abcdef</code>
+
+    <p><strong>✅ כן לעשות:</strong></p>
+    <code>אני רוצה לחבר את השירות X לאפליקציה שלי כדי לשלוח מיילים</code>
+
+    <p>Lovable ידריך אתכם:</p>
+    <ul>
+        <li>לאחסן את המפתח באופן מאובטח ב-Secrets storage</li>
+        <li>ליצור Edge Function שמשתמש במפתח בצד השרת</li>
+        <li>לקרוא ל-Edge Function מהקוד שלכם בצורה בטוחה</li>
+    </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+    <h2>💡 טיפים חשובים</h2>
+    <p>📌 <strong>בדקו לפני פרסום:</strong> תמיד הריצו סריקת אבטחה לפני שמפרסמים את האתר</p>
+    <p>📌 <strong>בדקו אחרי שינויים:</strong> כל שינוי משמעותי באפליקציה - הריצו סריקה מחדש</p>
+    <p>📌 <strong>אין אזהרות ≠ מאובטח:</strong> גם אם אין אזהרות, מומלץ לבדוק באופן יסודי</p>
+    <p>📌 <strong>מידע רגיש:</strong> אם דף הנחיתה/האתר מטפל במידע רגיש, שקלו להיעזר במומחה אבטחה</p>
+</div>
+
+<div class="divider"></div>
+
+<div class="error-box">
+    <h2>🔧 משהו לא עובד?</h2>
+
+    <p><strong>לא רואים את Security View:</strong></p>
+    <ul>
+        <li>ודאו שה-Cloud מופעל בפרויקט</li>
+        <li>נסו לרענן את הדף</li>
+    </ul>
+
+    <p><strong>התיקון האוטומטי לא עזר:</strong></p>
+    <ul>
+        <li>נסו לתאר את הבעיה בצ'אט ובקשו עזרה</li>
+        <li>בדקו את התיעוד של Lovable</li>
+    </ul>
+</div>
+
+<div class="divider"></div>
+
+<div class="checklist">
+    <h2>✅ רשימת בדיקה לפני סיום</h2>
+    <ul>
+        <li>פתחתי את Security View ובדקתי את הממצאים</li>
+        <li>תיקנתי את כל ה-Errors (שגיאות קריטיות)</li>
+        <li>עברתי על ה-Warnings והחלטתי מה לתקן</li>
+        <li>הרצתי סריקת אבטחה מעמיקה</li>
+        <li>וידאתי שאין מפתחות API חשופים בקוד</li>
+        <li>בדקתי שמדיניות ה-RLS מתאימה לצרכים שלי</li>
+    </ul>
+</div>
+
+    </div>
+</div>
+
+<a href="../../index.html" class="back-button">
+    <span class="back-button-tooltip">חזרה לכל המשימות</span>
+    ⬅️
+</a>
+
+<button onclick="window.print()" class="print-button" title="הדפס דף">
+    <span class="print-button-tooltip">הדפס דף</span>
+    🖨️
+</button>
+
+</body>
+</html>
+

@@ -18,6 +18,18 @@ const defaultData = {
                     pages: [
                         { id: "what-is-vibe-coding", title: "מה זה vibe coding?", file: "pages/what-is-vibe-coding.html" }
                     ]
+                },
+                {
+                    id: "lovable-exercises",
+                    name: "תרגולים ב-Lovable",
+                    icon: "💪",
+                    pages: [
+                        { id: "task1", title: "עיצוב דף נחיתה בצבעים אישיים", file: "pages/lovable-tasks/task1.html" },
+                        { id: "task2", title: "שיפור האלמנטים של דף נחיתה", file: "pages/lovable-tasks/task2.html" },
+                        { id: "task3", title: "חיבור ל-Cloud וצפייה בנתונים", file: "pages/lovable-tasks/task3.html" },
+                        { id: "task4", title: "פרסום דף נחיתה באינטרנט", file: "pages/lovable-tasks/task4.html" },
+                        { id: "task5", title: "אבטחת דף נחיתה", file: "pages/lovable-tasks/task5.html" }
+                    ]
                 }
             ]
         }
