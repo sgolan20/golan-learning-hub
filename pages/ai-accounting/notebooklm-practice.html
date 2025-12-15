@@ -27,53 +27,62 @@
             padding: 40px 30px;
         }
 
-        /* Brand Logo */
+        /* Brand Logo - fixed בפינה השמאלית העליונה */
         .brand-logo {
-            display: block;
-            max-width: 250px;
-            margin: 0 auto 30px auto;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
             height: auto;
+            z-index: 1001;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* Print Button */
+        .brand-logo:hover {
+            opacity: 1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Print Button - בצד ימין */
         .print-button {
             position: fixed;
             bottom: 30px;
-            left: 30px;
-            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            right: 30px;
+            background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
             color: white;
             border: none;
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 5px 20px rgba(44, 82, 130, 0.4);
+            cursor: pointer;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
 
         .print-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.6);
-        }
-
-        .print-button:active {
-            transform: translateY(-1px);
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(44, 82, 130, 0.6);
         }
 
         .print-button-tooltip {
             position: absolute;
-            right: 70px;
-            background: #2d3748;
+            left: 70px;
+            background: #333;
             color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 8px;
             white-space: nowrap;
+            font-size: 0.5em;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
@@ -81,12 +90,6 @@
 
         .print-button:hover .print-button-tooltip {
             opacity: 1;
-        }
-
-        @media print {
-            .print-button {
-                display: none;
-            }
         }
 
         /* Header */
@@ -526,52 +529,200 @@
             box-shadow: 0 15px 30px rgba(49, 130, 206, 0.5);
         }
 
-        /* Print styles */
-        @media print {
-            body {
-                background: #fff;
-            }
-
-            .container {
-                max-width: 100%;
-                padding: 20px;
-            }
-
-            .exercise:hover {
-                transform: none;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            }
-
-            .cta a {
-                box-shadow: none;
-            }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .header h2 {
-                font-size: 1.2rem;
-            }
-
-            .exercise-header {
-                flex-direction: column;
-                text-align: center;
+            body {
+                padding: 20px 10px;
             }
 
             .container {
                 padding: 20px 15px;
             }
+
+            .header {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header h2 {
+                font-size: 1.1rem;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .exercise-content {
+                padding: 20px;
+            }
+
+            .print-button {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.5em;
+            }
+
+            .print-button-tooltip {
+                display: none;
+            }
+
+            .brand-logo {
+                width: 60px;
+                top: 12px;
+                left: 12px;
+                padding: 5px;
+            }
+        }
+
+        /* עיצוב מותאם להדפסה */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .print-button {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 15px 20px !important;
+                margin-bottom: 15px !important;
+                border-radius: 0 !important;
+            }
+
+            .header h1 {
+                font-size: 1.6em !important;
+                margin-bottom: 5px !important;
+            }
+
+            .header h2 {
+                font-size: 1.1em !important;
+            }
+
+            /* לוגו מיתוג בהדפסה */
+            .brand-logo {
+                position: fixed !important;
+                top: 10px !important;
+                left: 10px !important;
+                width: 60px !important;
+                height: auto !important;
+                z-index: 1001 !important;
+                opacity: 0.9 !important;
+                display: block !important;
+                background: white !important;
+                padding: 6px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+            }
+
+            .intro-box {
+                margin-bottom: 20px !important;
+                padding: 15px !important;
+            }
+
+            .exercise {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-bottom: 20px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .exercise:hover {
+                transform: none !important;
+            }
+
+            .exercise-header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 12px 15px !important;
+            }
+
+            .exercise-content {
+                padding: 15px !important;
+            }
+
+            .prep-box,
+            .questions-box,
+            .persona-box,
+            .result-box {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 10px 0 !important;
+                padding: 12px !important;
+            }
+
+            .steps li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .summary {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-top: 20px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .summary-header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 12px 15px !important;
+            }
+
+            .summary-content {
+                padding: 15px !important;
+            }
+
+            .summary-section {
+                margin-bottom: 15px !important;
+                padding: 12px !important;
+            }
+
+            .cta {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 20px !important;
+                margin-top: 20px !important;
+            }
+
+            .cta a {
+                box-shadow: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="../logo-shahar.png" alt="שחר גולן - קורסים, הדרכות, סדנאות AI" class="brand-logo">
+    <img src="../logo-shahar.png" alt="שחר גולן - קורסים, הדרכות, סדנאות AI" class="brand-logo">
 
+    <div class="container">
         <!-- Header -->
         <header class="header">
             <h1>📋 דף תרגול</h1>
