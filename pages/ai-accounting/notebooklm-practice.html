@@ -27,6 +27,68 @@
             padding: 40px 30px;
         }
 
+        /* Brand Logo */
+        .brand-logo {
+            display: block;
+            max-width: 250px;
+            margin: 0 auto 30px auto;
+            height: auto;
+        }
+
+        /* Print Button */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .print-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(49, 130, 206, 0.6);
+        }
+
+        .print-button:active {
+            transform: translateY(-1px);
+        }
+
+        .print-button-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #2d3748;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .print-button:hover .print-button-tooltip {
+            opacity: 1;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+
         /* Header */
         .header {
             text-align: center;
@@ -508,6 +570,8 @@
 </head>
 <body>
     <div class="container">
+        <img src="../logo-shahar.png" alt="שחר גולן - קורסים, הדרכות, סדנאות AI" class="brand-logo">
+
         <!-- Header -->
         <header class="header">
             <h1>📋 דף תרגול</h1>
@@ -738,5 +802,11 @@
             <a href="https://notebooklm.google.com" target="_blank">כניסה ל-NotebookLM</a>
         </div>
     </div>
+
+    <button onclick="window.print()" class="print-button" title="הדפס דף">
+        <span class="print-button-tooltip">הדפס דף</span>
+        🖨️
+    </button>
+
 </body>
 </html>
