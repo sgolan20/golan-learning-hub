@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>דף תרגול NotebookLM לרואי חשבון</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            color: #2d3748;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* Brand Logo - fixed בפינה השמאלית העליונה */
+        .brand-logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: auto;
+            z-index: 1001;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .brand-logo:hover {
+            opacity: 1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Print Button - בצד ימין */
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(44, 82, 130, 0.4);
+            cursor: pointer;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(44, 82, 130, 0.6);
+        }
+
+        .print-button-tooltip {
+            position: absolute;
+            left: 70px;
+            background: #333;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            white-space: nowrap;
+            font-size: 0.5em;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .print-button:hover .print-button-tooltip {
+            opacity: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #2b6cb0 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(26, 54, 93, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .header h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #90cdf4;
+            position: relative;
+        }
+
+        /* Intro Box */
+        .intro-box {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-right: 5px solid #3182ce;
+            border-radius: 12px;
+            padding: 25px 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.15);
+        }
+
+        .intro-box h3 {
+            color: #2c5282;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro-box p {
+            color: #2d3748;
+            font-size: 1.05rem;
+        }
+
+        /* Exercise Card */
+        .exercise {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .exercise:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .exercise-header {
+            background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+            color: #fff;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .exercise-number {
+            background: rgba(255,255,255,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .exercise-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .exercise-content {
+            padding: 30px;
+        }
+
+        /* Preparation Box */
+        .prep-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-right: 4px solid #d69e2e;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+        }
+
+        .prep-box h4 {
+            color: #975a16;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .prep-box p {
+            color: #744210;
+            margin-bottom: 10px;
+        }
+
+        .prep-box ul {
+            list-style: none;
+            padding-right: 5px;
+        }
+
+        .prep-box ul li {
+            padding: 5px 0;
+            padding-right: 25px;
+            position: relative;
+            color: #744210;
+        }
+
+        .prep-box ul li::before {
+            content: '•';
+            position: absolute;
+            right: 5px;
+            color: #d69e2e;
+            font-weight: bold;
+        }
+
+        .tip {
+            background: #fefce8;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-top: 12px;
+            font-size: 0.95rem;
+        }
+
+        .tip strong {
+            color: #a16207;
+        }
+
+        /* Task Section */
+        .task-label {
+            color: #2c5282;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-description {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        /* Steps */
+        .steps-label {
+            color: #2c5282;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            padding: 12px 15px;
+            padding-right: 55px;
+            position: relative;
+            margin-bottom: 8px;
+            background: #f7fafc;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .steps li:hover {
+            background: #edf2f7;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Questions Box */
+        .questions-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .questions-box .question {
+            background: #fff;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-right: 3px solid #805ad5;
+            color: #553c9a;
+            font-style: italic;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .questions-box .question:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Persona Box */
+        .persona-box {
+            background: linear-gradient(135deg, #faf5ff 0%, #e9d8fd 100%);
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border: 1px solid #d6bcfa;
+        }
+
+        .persona-box h5 {
+            color: #6b46c1;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .persona-box .persona-content {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #553c9a;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* Expected Result */
+        .result-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-right: 4px solid #38a169;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-top: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .result-box .icon {
+            font-size: 1.3rem;
+        }
+
+        .result-box .result-text {
+            color: #276749;
+        }
+
+        .result-box strong {
+            color: #22543d;
+        }
+
+        /* Summary Section */
+        .summary {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .summary-header {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: #fff;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .summary-header h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .summary-content {
+            padding: 30px;
+        }
+
+        .summary-section {
+            margin-bottom: 30px;
+        }
+
+        .summary-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-section.tools {
+            background: linear-gradient(135deg, #ebf8ff 0%, #bee3f8 100%);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .summary-section.benefits {
+            background: linear-gradient(135deg, #fffaf0 0%, #feebc8 100%);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .summary-section.warnings {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .summary-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-section.tools h3 {
+            color: #2c5282;
+        }
+
+        .summary-section.benefits h3 {
+            color: #975a16;
+        }
+
+        .summary-section.warnings h3 {
+            color: #c53030;
+        }
+
+        .summary-section ul {
+            list-style: none;
+        }
+
+        .summary-section ul li {
+            padding: 8px 0;
+            padding-right: 30px;
+            position: relative;
+        }
+
+        .summary-section.tools ul li::before {
+            content: '✓';
+            position: absolute;
+            right: 5px;
+            color: #38a169;
+            font-weight: bold;
+        }
+
+        .summary-section.benefits ul li::before {
+            content: '★';
+            position: absolute;
+            right: 5px;
+            color: #d69e2e;
+        }
+
+        .summary-section.warnings ul li::before {
+            content: '⚠';
+            position: absolute;
+            right: 5px;
+            color: #e53e3e;
+        }
+
+        .summary-section ul li strong {
+            color: #2d3748;
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #ebf8ff 0%, #e9d8fd 50%, #feebc8 100%);
+            border-radius: 16px;
+            margin-top: 40px;
+        }
+
+        .cta h3 {
+            font-size: 1.8rem;
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+
+        .cta a {
+            display: inline-block;
+            background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .cta a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(49, 130, 206, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header h2 {
+                font-size: 1.1rem;
+            }
+
+            .exercise-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .exercise-content {
+                padding: 20px;
+            }
+
+            .print-button {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 1.5em;
+            }
+
+            .print-button-tooltip {
+                display: none;
+            }
+
+            .brand-logo {
+                width: 60px;
+                top: 12px;
+                left: 12px;
+                padding: 5px;
+            }
+        }
+
+        /* עיצוב מותאם להדפסה */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1cm;
+            }
+
+            body {
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .print-button {
+                display: none !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 15px 20px !important;
+                margin-bottom: 15px !important;
+                border-radius: 0 !important;
+            }
+
+            .header h1 {
+                font-size: 1.6em !important;
+                margin-bottom: 5px !important;
+            }
+
+            .header h2 {
+                font-size: 1.1em !important;
+            }
+
+            /* לוגו מיתוג בהדפסה */
+            .brand-logo {
+                position: fixed !important;
+                top: 10px !important;
+                left: 10px !important;
+                width: 60px !important;
+                height: auto !important;
+                z-index: 1001 !important;
+                opacity: 0.9 !important;
+                display: block !important;
+                background: white !important;
+                padding: 6px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+            }
+
+            .intro-box {
+                margin-bottom: 20px !important;
+                padding: 15px !important;
+            }
+
+            .exercise {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-bottom: 20px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .exercise:hover {
+                transform: none !important;
+            }
+
+            .exercise-header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 12px 15px !important;
+            }
+
+            .exercise-content {
+                padding: 15px !important;
+            }
+
+            .prep-box,
+            .questions-box,
+            .persona-box,
+            .result-box {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin: 10px 0 !important;
+                padding: 12px !important;
+            }
+
+            .steps li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .summary {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                margin-top: 20px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .summary-header {
+                background: #2c5282 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 12px 15px !important;
+            }
+
+            .summary-content {
+                padding: 15px !important;
+            }
+
+            .summary-section {
+                margin-bottom: 15px !important;
+                padding: 12px !important;
+            }
+
+            .cta {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                padding: 20px !important;
+                margin-top: 20px !important;
+            }
+
+            .cta a {
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="../logo-shahar.png" alt="שחר גולן - קורסים, הדרכות, סדנאות AI" class="brand-logo">
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📋 דף תרגול</h1>
+            <h2>NotebookLM לרואי חשבון</h2>
+        </header>
+
+        <!-- Intro Box -->
+        <div class="intro-box">
+            <h3>📚 מה נלמד בדף זה?</h3>
+            <p>בדף תרגול זה תתרגלו שימוש בכלי NotebookLM של גוגל לצרכים מקצועיים של רואי חשבון. נעבור על שלושה תרגילים מעשיים שיעזרו לכם לנתח דוחות כספיים, לשלוף מידע מהיר על לקוחות וליצור סיכומים מקצועיים.</p>
+        </div>
+
+        <!-- Exercise 1 -->
+        <article class="exercise">
+            <div class="exercise-header">
+                <div class="exercise-number">1</div>
+                <div class="exercise-title">ניתוח דוחות כספיים של לקוח</div>
+            </div>
+            <div class="exercise-content">
+                <!-- Preparation -->
+                <div class="prep-box">
+                    <h4>💡 הכנה לתרגיל - מה חשוב לדעת?</h4>
+                    <p>NotebookLM מאפשר להעלות מסמכים ולשאול עליהם שאלות בשפה טבעית. כשמעלים דוחות כספיים (PDF או Excel שיוצא כ-PDF), הכלי:</p>
+                    <ul>
+                        <li>מזהה אוטומטית מספרים, תאריכים וקטגוריות</li>
+                        <li>מסוגל להשוות בין תקופות שונות</li>
+                        <li>מספק ציטוטים עם הפניה למקור - קריטי לביקורת!</li>
+                    </ul>
+                    <div class="tip">
+                        <strong>💡 טיפ:</strong> ככל שהשאלה יותר ספציפית, התשובה תהיה יותר מדויקת.
+                    </div>
+                </div>
+
+                <!-- Task -->
+                <div class="task-label">📝 משימה:</div>
+                <p class="task-description">העלו דוח רווח והפסד של לקוח (מומלץ: 2-3 שנים להשוואה) ובצעו ניתוח ראשוני.</p>
+
+                <!-- Steps -->
+                <div class="steps-label">שלבי הביצוע:</div>
+                <ol class="steps">
+                    <li>היכנסו ל-notebooklm.google.com וצרו Notebook חדש</li>
+                    <li>העלו את דוחות הרווח וההפסד כמקורות (Sources)</li>
+                    <li>שאלו את השאלות הבאות בצ'אט:</li>
+                </ol>
+
+                <!-- Questions -->
+                <div class="questions-box">
+                    <div class="question">"מהן 5 ההוצאות הגדולות ביותר בשנת 2024?"</div>
+                    <div class="question">"השווה את הוצאות השכר בין 2023 ל-2024 - מה השינוי באחוזים?"</div>
+                    <div class="question">"האם יש הוצאות שעלו ביותר מ-20% משנה לשנה? פרט."</div>
+                    <div class="question">"צור טבלת השוואה של סעיפי ההכנסות העיקריים"</div>
+                </div>
+
+                <ol class="steps" start="4">
+                    <li>בדקו את הציטוטים - האם הם מפנים למקור הנכון?</li>
+                    <li>שמרו תשובות רלוונטיות כ-Notes בפאנל הימני</li>
+                </ol>
+
+                <!-- Expected Result -->
+                <div class="result-box">
+                    <span class="icon">✅</span>
+                    <div class="result-text">
+                        <strong>תוצאה צפויה:</strong> תקבלו ניתוח ראשוני של מגמות בהוצאות והכנסות, עם הפניות מדויקות לדוחות המקוריים.
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Exercise 2 -->
+        <article class="exercise">
+            <div class="exercise-header">
+                <div class="exercise-number">2</div>
+                <div class="exercise-title">יצירת "מומחה לקוח" אישי</div>
+            </div>
+            <div class="exercise-content">
+                <!-- Preparation -->
+                <div class="prep-box">
+                    <h4>💡 הכנה לתרגיל - מה חשוב לדעת?</h4>
+                    <p>בעדכון דצמבר 2025, NotebookLM הרחיב את אפשרות ה-Custom Persona ל-10,000 תווים! זה מאפשר ליצור "מומחה וירטואלי" מפורט שמכיר את הלקוח לעומק.</p>
+                    <p><strong>איך זה עובד?</strong> לוחצים על אייקון לוח המחוונים (☰) בצ'אט, בוחרים "בהתאמה אישית" ומגדירים הנחיות שינחו את התשובות.</p>
+                    <p><strong>למה זה שימושי?</strong> אפשר לקבל תשובות בפורמט אחיד, להתמקד בנקודות רלוונטיות לתחום שלכם, ולשמור על סגנון מקצועי.</p>
+                </div>
+
+                <!-- Task -->
+                <div class="task-label">📝 משימה:</div>
+                <p class="task-description">צרו Notebook ייעודי ללקוח עם פרסונה מותאמת של "יועץ פיננסי".</p>
+
+                <!-- Steps -->
+                <div class="steps-label">שלבי הביצוע:</div>
+                <ol class="steps">
+                    <li>צרו Notebook חדש בשם הלקוח</li>
+                    <li>העלו מסמכים מגוונים: דוחות כספיים, חשבוניות, התכתבויות עם הלקוח</li>
+                    <li>לחצו על אייקון לוח המחוונים (☰) בפאנל הצ'אט ובחרו "בהתאמה אישית"</li>
+                    <li>הזינו את הפרסונה הבאה:</li>
+                </ol>
+
+                <!-- Persona Box -->
+                <div class="persona-box">
+                    <h5>דוגמה לפרסונה:</h5>
+                    <div class="persona-content">
+                        "אתה יועץ פיננסי בכיר המתמחה בעסקים קטנים ובינוניים בישראל. כשאתה מנתח מידע:<br><br>
+                        1. התמקד בסעיפים עם השפעה מיסויית<br>
+                        2. הצבע על חריגות או אנומליות<br>
+                        3. הצע המלצות לייעול<br>
+                        4. השתמש במונחים מקצועיים בעברית<br>
+                        5. ציין תמיד את המקור המדויק לכל נתון"
+                    </div>
+                </div>
+
+                <ol class="steps" start="5">
+                    <li>שאלו: "מהם הסיכונים הפיננסיים העיקריים שאתה מזהה בתיק זה?"</li>
+                    <li>השוו את איכות התשובה לתשובה ללא פרסונה מוגדרת</li>
+                </ol>
+
+                <!-- Expected Result -->
+                <div class="result-box">
+                    <span class="icon">✅</span>
+                    <div class="result-text">
+                        <strong>תוצאה צפויה:</strong> תשובות ממוקדות יותר, בפורמט מקצועי, עם דגש על נושאים רלוונטיים לעבודת רואה החשבון.
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Exercise 3 -->
+        <article class="exercise">
+            <div class="exercise-header">
+                <div class="exercise-number">3</div>
+                <div class="exercise-title">הכנת סיכום לפגישה עם לקוח</div>
+            </div>
+            <div class="exercise-content">
+                <!-- Preparation -->
+                <div class="prep-box">
+                    <h4>💡 הכנה לתרגיל - מה חשוב לדעת?</h4>
+                    <p>NotebookLM מציע כלים ליצירת תוצרים מוכנים בפאנל "סטודיו" (Studio):</p>
+                    <ul>
+                        <li><strong>דו"ח</strong> (Briefing Doc) - סיכום תמציתי של כל המקורות</li>
+                        <li><strong>מצגת שקופיות</strong> (Slide Deck) - מצגת אוטומטית (חדש! נובמבר 2025)</li>
+                        <li><strong>אינפוגרפיקה</strong> (Infographic) - ויזואליזציה של הנתונים (חדש! נובמבר 2025)</li>
+                        <li><strong>סקירה קולית</strong> (Audio Overview) - פודקאסט שמסכם את החומר</li>
+                    </ul>
+                    <div class="tip">
+                        <strong>💡 טיפ:</strong> לחצו על אייקון העיפרון (✏️) ליד כל אפשרות כדי להתאים אישית את התוצר.
+                    </div>
+                </div>
+
+                <!-- Task -->
+                <div class="task-label">📝 משימה:</div>
+                <p class="task-description">הכינו חומרי סיכום לקראת פגישה שנתית עם לקוח - סיכום כתוב ומצגת.</p>
+
+                <!-- Steps -->
+                <div class="steps-label">שלבי הביצוע:</div>
+                <ol class="steps">
+                    <li>השתמשו ב-Notebook מתרגיל 2 (או צרו חדש עם מסמכי הלקוח)</li>
+                    <li>בפאנל "סטודיו" (צד שמאל), לחצו על "דו"ח"</li>
+                    <li>לחצו על ✏️ והוסיפו הנחיות:</li>
+                </ol>
+
+                <!-- Instructions Box -->
+                <div class="questions-box">
+                    <div class="question">"צור סיכום שנתי ללקוח הכולל: סקירת ביצועים פיננסיים, השוואה לשנה קודמת, נקודות לתשומת לב, והמלצות לשנה הבאה. הסיכום מיועד להצגה בפני הלקוח."</div>
+                </div>
+
+                <ol class="steps" start="4">
+                    <li>עברו לאפשרות "מצגת שקופיות" וצרו מצגת</li>
+                    <li>התאימו: בחרו פורמט קצר (5-7 שקפים) ורמת פירוט בינונית</li>
+                    <li>(אופציונלי) צרו "אינפוגרפיקה" לוויזואליזציה של נתונים מרכזיים</li>
+                    <li>(בונוס) צרו "סקירה קולית" והאזינו לסיכום בדרך לפגישה! 🎧</li>
+                </ol>
+
+                <!-- Expected Result -->
+                <div class="result-box">
+                    <span class="icon">✅</span>
+                    <div class="result-text">
+                        <strong>תוצאה צפויה:</strong> סיכום מקצועי + מצגת מוכנה להצגה בפני הלקוח, שנוצרו תוך דקות במקום שעות עבודה.
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Summary -->
+        <section class="summary">
+            <div class="summary-header">
+                <h2>📚 סיכום - מה למדנו?</h2>
+            </div>
+            <div class="summary-content">
+                <!-- Tools -->
+                <div class="summary-section tools">
+                    <h3>🛠️ כלים שתרגלנו:</h3>
+                    <ul>
+                        <li><strong>שיחה עם מקורות</strong> - שאילת שאלות בשפה טבעית על מסמכים פיננסיים</li>
+                        <li><strong>התאמה אישית</strong> (Custom Persona) - התאמת NotebookLM לצרכים מקצועיים ספציפיים</li>
+                        <li><strong>דו"ח</strong> (Briefing Doc) - יצירת סיכומים מקצועיים אוטומטית</li>
+                        <li><strong>מצגת שקופיות</strong> (Slide Deck) - מצגות מוכנות מהמקורות (חדש!)</li>
+                        <li><strong>אינפוגרפיקה</strong> (Infographic) - ויזואליזציה של נתונים (חדש!)</li>
+                        <li><strong>סקירה קולית</strong> (Audio Overview) - האזנה לסיכומים בדרכים</li>
+                    </ul>
+                </div>
+
+                <!-- Benefits -->
+                <div class="summary-section benefits">
+                    <h3>⭐ יתרונות מרכזיים לרואה חשבון:</h3>
+                    <ul>
+                        <li><strong>חיסכון משמעותי בזמן</strong> - ניתוח דוחות בדקות במקום שעות</li>
+                        <li><strong>ציטוטים עם מקור</strong> - קריטי לביקורת ואימות מידע</li>
+                        <li><strong>זיהוי אנומליות</strong> - הכלי מצביע על חריגות שקל לפספס</li>
+                        <li><strong>"זיכרון" ללקוח</strong> - כל המסמכים במקום אחד, זמינים לשאילתות</li>
+                        <li><strong>פרטיות</strong> - גוגל מצהירה שהנתונים לא משמשים לאימון מודלים</li>
+                    </ul>
+                </div>
+
+                <!-- Warnings -->
+                <div class="summary-section warnings">
+                    <h3>⚠️ נקודות לזכור:</h3>
+                    <ul>
+                        <li>תמיד לאמת נתונים חשובים מול המקור המקורי</li>
+                        <li>NotebookLM הוא כלי עזר - לא תחליף לשיקול דעת מקצועי</li>
+                        <li>מומלץ להשתמש בחשבון Google Workspace לפרטיות מוגברת</li>
+                        <li>אל תעלו נתונים רגישים במיוחד (מספרי ת.ז., סיסמאות, פרטי אשראי)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta">
+            <h3>🚀 בהצלחה בתרגול!</h3>
+            <a href="https://notebooklm.google.com" target="_blank">כניסה ל-NotebookLM</a>
+        </div>
+    </div>
+
+    <button onclick="window.print()" class="print-button" title="הדפס דף">
+        <span class="print-button-tooltip">הדפס דף</span>
+        🖨️
+    </button>
+
+</body>
+</html>

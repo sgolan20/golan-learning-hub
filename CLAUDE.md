@@ -40,6 +40,63 @@ siteData.topics = [
 1. צור קובץ HTML חדש בתיקיית `pages/`
 2. הוסף entry ל-`siteData.topics` ב-`js/data.js`
 
+## יצירת דף תרגול חדש
+
+### תבנית
+השתמש בקובץ `pages/template-practice.html` כבסיס לכל דף תרגול חדש.
+
+### מבנה חובה לדף תרגול
+```html
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <!-- פונט Heebo מ-Google Fonts -->
+    <!-- CSS מלא בתוך הקובץ (לא קובץ חיצוני) -->
+</head>
+<body>
+    <!-- לוגו - מחוץ ל-container, position: fixed -->
+    <img src="../logo-shahar.png" class="brand-logo">
+
+    <div class="container">
+        <header class="header">...</header>
+        <div class="intro-box">...</div>
+        <article class="exercise">...</article>
+        <section class="summary">...</section>
+        <div class="cta">...</div>
+    </div>
+
+    <!-- כפתור הדפסה - מחוץ ל-container, position: fixed -->
+    <button class="print-button">🖨️</button>
+</body>
+</html>
+```
+
+### אלמנטים קבועים
+| אלמנט | מיקום | CSS |
+|-------|-------|-----|
+| `.brand-logo` | פינה שמאלית עליונה | `position: fixed; top: 20px; left: 20px;` |
+| `.print-button` | פינה ימנית תחתונה | `position: fixed; bottom: 30px; right: 30px;` |
+
+### CSS חובה
+1. **Responsive** - `@media (max-width: 768px)` לגדלים קטנים יותר במובייל
+2. **Print** - `@media print` עם:
+   - `page-break-inside: avoid` לכרטיסי תרגיל
+   - `print-color-adjust: exact` לשמירת צבעים
+   - הסתרת כפתור הדפסה
+   - לוגו נשאר בפינה
+
+### צבעי קורסים קיימים
+| קורס | צבע ראשי | HEX |
+|------|----------|-----|
+| בניית אתר ב-AI | סגול | `#667eea` → `#764ba2` |
+| AI לרואי חשבון | כחול כהה | `#1a365d` → `#2c5282` |
+
+### רכיבי תרגיל
+- `.prep-box` - הכנה לתרגיל (צהוב)
+- `.steps` - רשימה ממוספרת עם עיגולים צבעוניים
+- `.questions-box` - שאלות/פרומפטים לדוגמה (סגול)
+- `.result-box` - תוצאה צפויה (ירוק)
+
 ## Git Workflow
 
 ### Commit Policy

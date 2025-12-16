@@ -24,6 +24,23 @@ const defaultData = {
                     ]
                 }
             ]
+        },
+        {
+            id: "ai-accounting",
+            name: "AI לרואי חשבון",
+            icon: "💼",
+            description: "כלי AI מתקדמים לרואי חשבון - ניתוח דוחות, אוטומציה ויעילות",
+            color: "#2c5282",
+            topics: [
+                {
+                    id: "notebooklm",
+                    name: "NotebookLM",
+                    icon: "📊",
+                    pages: [
+                        { id: "notebooklm-practice", title: "תרגול NotebookLM לרואי חשבון", file: "pages/ai-accounting/notebooklm-practice.html" }
+                    ]
+                }
+            ]
         }
     ]
 };
